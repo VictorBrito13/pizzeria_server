@@ -3,17 +3,16 @@
 //Imports
 var mongoose = require('mongoose');
 var app = require('./app');
-var port = 6800;
-
+const PORT = process.env.PORT || 6800;
+const URL = process.env.URL || 'mongodb://127.0.0.1/pizzeriabd'
 
 
 mongoose.Promise = global.Promise;
 //Conexion a la base de datos
-mongoose.connect('mongodb://127.0.0.1/pizzeriabd')
+mongoose.connect(URL)
 .then(()=>{
-    console.log("base de datos de la pizzería conectada exitosamente");
-    app.listen(port, ()=>{
-        console.log("servidor corriendo en el puerto " + port);
+    app.listen(PORT, ()=>{
+        console.log("server listening on port " + PORT);
     });
 })
 .catch((err)=>{
